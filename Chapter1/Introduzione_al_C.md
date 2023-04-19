@@ -1,8 +1,10 @@
 **1. INTRODUZIONE AL C**
 
-**<u>*Che cos'è il C?*</u>**
+**<u>Che cos'è il C?</u>**
 
 un linguaggio di programmazione ampiamente utilizzato sviluppato nei primi  anni 70 presso i laboratori Bell
+
+---
 
 **<u>Storia del C</u>**
 
