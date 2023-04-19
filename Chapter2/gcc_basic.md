@@ -18,6 +18,8 @@ D&R (Domande e risposte) pag 32
 
 -std=c99 
 
+-S  [file.c] --> da c ad ASM (file.s)
+
 <br>
 
 **2.2 uso dettagliato di gcc:**
@@ -35,5 +37,3 @@ sudo apt install tldr
 tldr -u
 tldr gcc
 ```
-
-
