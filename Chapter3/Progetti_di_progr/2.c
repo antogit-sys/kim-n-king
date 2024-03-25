@@ -46,9 +46,6 @@ int main(void)
     fputs("Enter unit price: ", stdout);
     scanf("%f", &unit_price);
 
-    //fputs(stdout, "Enter purchase date (mm/dd/yyyy): ");
-    //scanf("%.2d / %.2d / %.4d", &d.month, &d.day, &d.year);
-
     d = inputDate("Enter purchase date (mm/dd/yyyy): ");
     
     putchar('\n');   
