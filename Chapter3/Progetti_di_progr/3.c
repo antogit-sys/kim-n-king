@@ -36,8 +36,13 @@ int main(void)
     fputs("Enter ISBN: ", stdout);
     fgets(isbn,MAX_LENGTH, stdin);
 
+    //isbn[strcspn(isbn, "\n")] = '\0'; bug code execution
+
+    isbn[strlen(isbn)-1] = '\0';
+
     analyze_ISBN(isbn);
 
+    putchar('\n');
 
 return 0;
 }
