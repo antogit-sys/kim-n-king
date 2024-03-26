@@ -53,6 +53,6 @@ void analyze_ISBN(char* isbn){
     
     for(size_t gc=0; token!=NULL; gc++){ //group count
         fprintf(stdout,"%s: %s\n",name_group[gc], token);
-        token = strtok(NULL, "-"); //punta al prossimo token
+        token = strtok(NULL, "-"); //point to next token
     }        
 }
