@@ -14,12 +14,12 @@ typedef unsigned long ulong;
 ulong** create_matrix(ulong, ulong, bool);
 ulong** fill_matrix(ulong, ulong, ulong, ulong);
 
-int main()
+int main(void)
 {
     int** m = (int**)create_matrix(4,4, true);
     
 
-return 0;
+return EXIT_SUCCESS;
 }
 
 ulong** create_matrix(ulong r, ulong c, bool f_fill){
