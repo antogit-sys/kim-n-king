@@ -27,21 +27,21 @@ ulong** create_matrix(ulong r, ulong c, bool f_fill){
     ulong size = r*c;
 
     if(m == NULL){
-	    fprintf(stderr,"Error of allocation the memory for rows\n");
-	    exit(1);	
+        fprintf(stderr,"Error of allocation the memory for rows\n");
+        exit(1);	
     }
 	
     for(size_t i=0; i<r; ++i){
-	    m[i] = (ulong*)calloc(c, sizeof(ulong));
-	    if(m[i] == NULL){
-	    	fprintf(stderr,"Error of allocation the memory for columns\n");
-		   	exit(1);	
-	    }
+        m[i] = (ulong*)calloc(c, sizeof(ulong));
+        if(m[i] == NULL){
+            fprintf(stderr,"Error of allocation the memory for columns\n");
+            exit(1);
+        }
     }
-
+    
     (f_fill == true)? m = fill_matrix(1, size, r,c):0;
 
-	return m;
+    return m;
 }
 
 
