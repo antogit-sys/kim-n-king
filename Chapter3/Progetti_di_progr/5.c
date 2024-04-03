@@ -47,8 +47,7 @@ ulong** create_matrix(ulong r, ulong c, bool f_fill){
 
 ulong** fill_matrix(ulong n_min, ulong n_max, ulong r, ulong c){
     if(r*c != n_max-n_min+1){
-		fprintf(stderr,"Error number maximum is less of max number element\n");
-		exit(1);
-	}
-
+        fprintf(stderr,"Error number maximum is less of max number element\n");
+        exit(1);
+    }
 }
