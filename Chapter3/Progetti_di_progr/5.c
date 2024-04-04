@@ -96,8 +96,8 @@ void printMatrix(ulong **m, ulong r, ulong c){
     }
 }
 
-void freeMatrix(ulong** m, ulong r) {
-    for (size_t i = 0; i < r; ++i) {
+void freeMatrix(ulong** m, ulong r){
+    for(size_t i=0; i<r; ++i){
         free(m[i]);
     }
     free(m);
