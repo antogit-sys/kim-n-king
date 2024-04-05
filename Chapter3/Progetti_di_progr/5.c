@@ -127,7 +127,10 @@ bool checkDuplicate(int num, int** m, int rows, int columns){
     bool done = false;
     for(size_t i=0; i<rows; ++i){
         for(size_t j=0; j<columns; ++j){
-            (m[i][j] == num)?done=true:0;
+            if(m[i][j] == num){
+                done=true;
+                break;
+            }
         }
     }
 return done;
