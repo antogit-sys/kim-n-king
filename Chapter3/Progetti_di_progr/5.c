@@ -25,7 +25,7 @@
  *  
  *  MY IMPLEMENT
  *      ||          (I'm only 20, don't expect much)
- *      ||          (Yes is truly a arrows XD)
+ *      ||          (Yes is truly an arrows XD)
  *      \/
  *       
  *
