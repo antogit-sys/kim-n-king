@@ -1,7 +1,33 @@
-/* - Progetti di prog
+/* - Project 3.05
  *
- *  5. traccia che inserirò dopo XD
- *  ...
+ *  5. Write a program that asks the user to enter the numbers from 1 to 16 (in any order) 
+ *  and then displays the numbers in a 4 by 4 arrangement, followed by the sums of the rows, 
+ *  columns, and diagonals:
+ *
+ *  Enter the numbers from 1 to 16 in any order:
+ *  16 3 2 13 5 10 11 8 9 6 7 12 4 15 14 1
+ *   
+ *  16  3  2 13
+ *   5 10 11  8
+ *   9  6  7 12
+ *   4 15 14  1
+ *
+ *  Row sums: 34 34 34 34
+ *  Column sums: 34 34 34 34
+ *  Diagonal sums: 34 34
+ *
+ *  If the row, column, and diagonal sums are all the same (as they are in this example), the 
+ *  numbers are said to form a magic square. The magic square shown here appears in a 1514 engraving 
+ *  by artist and mathematician Albrecht Dürer. (Note that the middle numbers in the last row give the 
+ *  date of engraving.)
+ *  
+ *  ============
+ *  
+ *  MY IMPLEMENT
+ *      ||          (I'm only 20, don't expect much)
+ *      ||          (Yes is truly a arrows XD)
+ *      \/
+ *       
  *
  */
 
@@ -12,32 +38,52 @@
 
 #define RANDINT(n_min, n_max) (rand() % ((n_max) - (n_min) + 1) + (n_min))
 
-typedef unsigned long ulong;
+void swapint(int*,int*);
 
-ulong** create_matrix(ulong, ulong, bool);
-ulong** fill_matrix(ulong, ulong, ulong, ulong);
-bool checkDuplicate(ulong,ulong**,ulong,ulong);
-void printMatrix(ulong**, ulong, ulong);
-void freeMatrix(ulong**, ulong);
-//void sumMatrix(bool,ulong**, ulong, ulong);
+int** create_matrix(int, int, bool);
+int** fill_matrix(int, int, int, int);
+bool checkDuplicate(int,int**,int,int);
+void printMatrix(int**, int, int);
+void freeMatrix(int**, int);
+int* sumMatrixRC(bool, int**, int, int);
 
 int main(void)
 {
-    int r=4,c=4;
+    int r=4,c=5;
 
     srand(time(NULL));
-    ulong** m = (ulong**)create_matrix(r,c, true);
+    int** m = create_matrix(r,c, true);
     printMatrix(m, r,c);
-    //sum_matrix("Rows sums: ",m,r);
+    putchar('\n');
 
+    int* column_sums = sumMatrixRC(false, m, r, c);
+    printf("Column sums:\n");
+    for(int i=0; i<c; ++i){
+        printf("colonna %d: %d\n", i, column_sums[i]);
+    }
+    putchar('\n');
+
+    int* row_sums = sumMatrixRC(true, m, r, c);
+    printf("Row sums:\n");
+    for (int i=0; i<r; ++i){
+        printf("Riga %d: %d\n", i, row_sums[i]);
+    }
+    putchar('\n');
     freeMatrix(m,r);
 
 return EXIT_SUCCESS;
 }
 
-ulong** create_matrix(ulong r, ulong c, bool f_fill){
-    ulong **m = (ulong**) calloc(r, sizeof(ulong*));
-    ulong size = r*c;
+void swapint(int* n1, int* n2){
+    *n1 = *n1 + *n2;
+    *n2 = *n1 - *n2;
+    *n1 = *n1 - *n2;
+}
+
+/* -- Matrix --  */
+int** create_matrix(int r, int c, bool f_fill){
+    int **m = (int**) calloc(r, sizeof(int*));
+    int size = r*c;
 
     if(m == NULL){
         fprintf(stderr,"Error of allocation the memory for rows\n");
@@ -45,7 +91,7 @@ ulong** create_matrix(ulong r, ulong c, bool f_fill){
     }
 	
     for(size_t i=0; i<r; ++i){
-        m[i] = (ulong*)calloc(c, sizeof(ulong));
+        m[i] = (int*)calloc(c, sizeof(int));
         if(m[i] == NULL){
             fprintf(stderr,"Error of allocation the memory for columns\n");
             exit(1);
@@ -57,17 +103,17 @@ ulong** create_matrix(ulong r, ulong c, bool f_fill){
     return m;
 }
 
-ulong** fill_matrix(ulong n_min, ulong n_max, ulong r, ulong c){
+int** fill_matrix(int n_min, int n_max, int r, int c){
     if(r*c != n_max-n_min+1){
         fprintf(stderr,"Error number maximum is less of max number element\n");
         exit(1);
     }
     
-    ulong** mlocal = (ulong**)create_matrix(r,c,false);
+    int** mlocal = create_matrix(r,c,false);
 
     for(size_t i=0; i<r; ++i){
         for(size_t j=0; j<c; ++j){
-            ulong num;
+            int num;
             do{
                 num = RANDINT(n_min, n_max);
             }while(checkDuplicate(num, mlocal, r,c));
@@ -77,8 +123,7 @@ ulong** fill_matrix(ulong n_min, ulong n_max, ulong r, ulong c){
 return mlocal;
 }
 
-
-bool checkDuplicate(ulong num, ulong** m, ulong rows, ulong columns){
+bool checkDuplicate(int num, int** m, int rows, int columns){
     bool done = false;
     for(size_t i=0; i<rows; ++i){
         for(size_t j=0; j<columns; ++j){
@@ -88,23 +133,39 @@ bool checkDuplicate(ulong num, ulong** m, ulong rows, ulong columns){
 return done;
 }
 
-void printMatrix(ulong **m, ulong r, ulong c){
+void printMatrix(int **m, int r, int c){
     for(size_t i=0; i<r; ++i){
         for(size_t j=0; j<c; ++j)
-            printf("%2lu ",m[i][j]);
+            printf("%2d ",m[i][j]);
         putchar('\n');
     }
 }
 
-void freeMatrix(ulong** m, ulong r){
+void freeMatrix(int** m, int r){
     for(size_t i=0; i<r; ++i){
         free(m[i]);
     }
     free(m);
 }
 
-/*void sumMatrix(bool f_rows, ulong** m, ulong r, ulong c){
-    ulong rorc; //rows or columns
+int* sumMatrixRC(bool f_rows, int** m, int r, int c){
+    //possible row/columns
+    int pr = r;
+    int pc = c;
     
-    (f_rows == true)?rorc = r: rorc = c;
-}*/
+    (!f_rows)?swapint(&pr,&pc):0;
+    
+    //create array --> sum rows or columns
+    int* sums_rorc = (int*)calloc(pr,sizeof(int)); //r or c
+    if(sums_rorc == NULL){
+        fprintf(stderr,"Error of allocation the memory for sums");
+    }
+
+    for(size_t i=0; i<pr; ++i){
+        for(size_t j=0; j<pc; ++j){
+            size_t n = m[f_rows?i:j][f_rows?j:i];
+            sums_rorc[i]+=n;
+        } 
+    }
+return sums_rorc;
+}
