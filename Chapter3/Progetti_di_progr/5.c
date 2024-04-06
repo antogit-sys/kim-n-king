@@ -36,7 +36,8 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define RANDINT(n_min, n_max) (rand() % ((n_max) - (n_min) + 1) + (n_min))
+#define RANDINT(n_min, n_max)           (rand() % ((n_max) - (n_min) + 1) + (n_min))
+#define isSquareMatrix(rows, cols)      ((rows == cols) && (rows>1 && cols >1) )//?true:false)
 
 void swapint(int*,int*);
 
@@ -46,10 +47,12 @@ bool checkDuplicate(int,int**,int,int);
 void printMatrix(int**, int, int);
 void freeMatrix(int**, int);
 int* sumMatrixRC(bool, int**, int, int);
+void sum2Diagonals(int**, int, int, int*, int*);
 
 int main(void)
 {
-    int r=4,c=5;
+    int r=4,c=4;
+    int d1, d2;
 
     srand(time(NULL));
     int** m = create_matrix(r,c, true);
@@ -59,18 +62,22 @@ int main(void)
     int* column_sums = sumMatrixRC(false, m, r, c);
     printf("Column sums:\n");
     for(int i=0; i<c; ++i){
-        printf("colonna %d: %d\n", i, column_sums[i]);
+        printf("colonna %d: %d\n", i+1, column_sums[i]);
     }
     putchar('\n');
 
     int* row_sums = sumMatrixRC(true, m, r, c);
     printf("Row sums:\n");
     for (int i=0; i<r; ++i){
-        printf("Riga %d: %d\n", i, row_sums[i]);
+        printf("Riga %d: %d\n", i+1, row_sums[i]);
     }
     putchar('\n');
-    freeMatrix(m,r);
 
+    sum2Diagonals(m,r,c, &d1,&d2); 
+    printf("sum diagonal 1: %d\n",d1);
+    printf("sum diagonal 2: %d\n0",d2);
+
+	freeMatrix(m,r);
 return EXIT_SUCCESS;
 }
 
@@ -172,3 +179,20 @@ int* sumMatrixRC(bool f_rows, int** m, int r, int c){
     }
 return sums_rorc;
 }
+
+
+void sum2Diagonals(int** m, int r, int c, int *diag1, int *diag2){
+    if(!isSquareMatrix(r, c)){
+        fprintf(stderr, "Errore: la matrice non è quadrata o ha dimensioni non valide!\n");
+        exit(1);
+    }
+
+    *diag1 = 0;
+    *diag2 = 0;
+
+    for(size_t i=0; i<r; ++i){
+        *diag1 += m[i][i];
+        *diag2 += m[i][c - 1 - i];
+    }
+}
+
