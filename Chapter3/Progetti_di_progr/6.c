@@ -1,14 +1,14 @@
 /* - Progetti di prog
  *
- *  4. Scrivete un programma che chieda all'utente di inserire un numero
- *  telefonico nella forma (xxx) xxx-xxxx e successivamente stampi il
- *  numero nella forma xxx.xxx.xxxx
+ *  6. modificate il programma addfrac.c della Sezione 3.2 in modo che l'utente
+ *  immetta allo stesso tempo entrambe le frazioni separate da un segno più:
+ *  
+ *  Enter two fractions separated by a plus sign: 5/6+3/4
+ *  The sum is 38/24
  *
  */
 
 #include <stdio.h>
-#include <string.h>
-#define N 15
 
 typedef struct{
     int num;
