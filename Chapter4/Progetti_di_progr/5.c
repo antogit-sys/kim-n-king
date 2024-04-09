@@ -24,7 +24,7 @@
     }while(0)  
 
 
-int calc_check_digit(char*);
+int calc_check_digitUPC(char*);
 int* string_to_int_array(char*);
 
 int main(void)
@@ -34,12 +34,12 @@ int main(void)
     fputs("Enter the first 11 digits of a UPC: ",stdout);
     fscanf(stdin,"%s",digits);
 
-    fprintf(stdout,"check digit: %d\n",calc_check_digit(digits));
+    fprintf(stdout,"check digit: %d\n",calc_check_digitUPC(digits));
     
 return EXIT_SUCCESS;
 }
 
-int calc_check_digit(char* digits){
+int calc_check_digitUPC(char* digits){
     int first_sum = 0, second_sum = 0;
     int total = 0, cd = 0;
     int size = strlen(digits);
