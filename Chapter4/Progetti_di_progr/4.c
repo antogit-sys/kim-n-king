@@ -1,8 +1,18 @@
 /*  - Progetti di prog
  *  
- *  3. Riscrivete il programma del Progetto di Programmazione 2 in modo che stampi
- *  la scrittura inversa di un numero 
- * ________________________________________________________________________________
+ *  4. Scrivete un programma che legga un numero intero inserito dall'utente 
+ *  e lo visualizzi in ottale (base 8):
+ *
+ *      Enter a number between 0 and 32767
+ *      In octal, the your number is: 03641
+ *
+ *  L'output dovrebbe essere visualizzato utilizzando cinque cifre anche se 
+ *  sono sufficienti meno cifre. Suggerimento: per convertire il numero in ottale, 
+ *  dividerlo prima per 8; il resto è l'ultima cifra del numero ottale (1, in questo caso).
+ *  Quindi dividi il numero originale per 8 e ripeti il processo per arrivare alla 
+ *  penultima cifra. (printf è in grado di visualizzare numeri in base 8, come vedremo 
+ *  nel Capitolo 7, quindi esiste in realtà un modo più semplice per scrivere questo programma.)  
+ * _____________________________________________________________________________________________
  */
 
 
