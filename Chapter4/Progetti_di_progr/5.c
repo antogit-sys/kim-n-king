@@ -49,7 +49,7 @@ int calc_check_digitUPC(char* digits){
     int* newDigits=string_to_int_array(digits);
 
     for(unsigned int i=0; i<size; ++i){
-        if(digits[i]%2 == 0)
+        if(i%2 == 0)
             first_sum+=newDigits[i];
         else
             second_sum+=newDigits[i];
