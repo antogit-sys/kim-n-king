@@ -15,9 +15,10 @@
  */
 #include <stdio.h>
 
-size_t CALC_DIGITS(int n){
-    int temp = n;
+size_t CALC_DIGITS(size_t n){
+    size_t temp = n;
     size_t counter = 0;
+
     for(; temp != 0; ++counter){
         temp/=10;
     }
