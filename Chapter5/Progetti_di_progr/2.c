@@ -28,7 +28,7 @@
 int main(void)
 {
     int hours, minutes;
-    printf("Inserisci un'ora nel formato 24 ore: ");
+    printf("Enter a 24-hour time: ");
     scanf("%d:%d", &hours, &minutes);
     
     /*
