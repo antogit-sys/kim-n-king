@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NOP 0
 #define CONVERT_TO_12_HOUR(hours) ((hours == 0 || hours == 12) ? 12 : (hours % 12))
 
 // Macro to determinate if the time is AM or PM
 #define AM_PM(hours) (hours < 12 ? "AM" : "PM")
 
-#define PRINT_TIME(__s, t)	(fprintf(stdout, "%s%.2u:%.2u %s\n",__s, CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours)))
+//#define PRINT_TIME(__s, t)	(fprintf(stdout, "%s%.2u:%.2u %s\n",__s, CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours)))
 
 #define CALC_MINUTE(t)          (t.hours*60+t.minutes)
 
@@ -17,9 +18,9 @@ typedef struct{
 
 
 Time input_t(const char*);
-const char* view_t(Time);
 size_t find_nearest_time(Time*, size_t, Time);
-const char* s
+const char* view_t(Time*, size_t);
+
 int main(void)
 {
     Time t;
@@ -50,9 +51,9 @@ int main(void)
 
     t = input_t("Enter a 24-hour: ");
 
-    //printf("%ld\n",find_nearest_time(opart,length,t));
-    //printf("Closest deapture time is %s, arriving at %s",view_t(t), view_arriving_t(oarr));
-
+    size_t index = find_nearest_time(opart,length,t);
+    printf("Closest deapture time is %s, arriving at %s\n",view_t(opart, index), view_t(oarr,index));
+    
 return EXIT_SUCCESS;
 }
 
@@ -66,37 +67,32 @@ Time input_t(const char* __s){
    
     if(t.hours>24 || t.minutes>59 || result == 0){
         fprintf(stderr,"%s","Error time! not valid\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
            
    return t;
 }
-const char* view_t(Time t){
-    //00:00·[AM/PM] charter max = 8+1;
-    char* __s = malloc(sizeof(char)*9);
-    
-    if(__s == NULL){
-        fprintf(stderr,"%s","Error! dynamic allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    sprintf(__s, "%.2u:%.2u %s", CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours));
-    return __s;
-}
 
 size_t find_nearest_time(Time* opart, size_t length, Time user_t){
     size_t user_time = CALC_MINUTE(user_t);
-    size_t opart_min_time = CALC_MINUTE(opart[0]);
-    
     size_t jpos = 0;
 
-    for(size_t i=1; i<length; ++i){
-        size_t cmtd = CALC_MINUTE(opart[i]); //departure
-        if(user_time > cmtd){
-            opart_min_time = cmtd;
-            ++jpos;
-        }
-    }
+    for(size_t i=1; i<length; ++i)
+        (user_time > CALC_MINUTE(opart[i]))? ++jpos : NOP;
+    
     return jpos;
 }
 
+const char* view_t(Time* oarr, size_t index){
+    Time t = oarr[index];
+    char* buf = (char*)malloc(sizeof(char)*9);
+    
+    if(buf == NULL){
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    sprintf(buf,"%.2u:%.2u %s",CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours));
+    
+    return buf;
+}
