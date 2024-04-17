@@ -112,8 +112,8 @@ size_t find_nearest_time(Time* opart, size_t length, Time user_t){
     return jpos;
 }
 
-const char* view_t(Time* oarr, size_t index){
-    Time t = oarr[index];
+const char* view_t(Time* array_t, size_t index){
+    Time t = array_t[index];
     char* buf = (char*)malloc(sizeof(char)*9);
     
     if(buf == NULL){
