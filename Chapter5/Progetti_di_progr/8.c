@@ -8,7 +8,7 @@
 
 #define PRINT_TIME(__s, t)	(fprintf(stdout, "%s%.2u:%.2u %s\n",__s, CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours)))
 
-#define CALC_MINUTE(t) (t.hours*60+t.minutes)
+#define CALC_MINUTE(t)          (t.hours*60+t.minutes)
 
 typedef struct{
     unsigned int hours;
@@ -18,7 +18,7 @@ typedef struct{
 
 Time input_t(const char*);
 void print_t(const char*, Time);
-void find_nearest_time(Time, Time);
+size_t find_nearest_time(Time*, size_t, Time);
 
 int main(void)
 {
@@ -45,16 +45,13 @@ int main(void)
         {21, 20},
         {23, 58}
     };
-
-    int size = sizeof(oarr)/sizeof(oarr[0]);
+    
+    size_t length = sizeof(oarr)/sizeof(oarr[0]);
 
     t = input_t("Enter a 24-hour: ");
-    int user_time = CALC_MINUTE(t);
 
-    PRINT_TIME("Test: ",t);
-
-    /* work in progress... */
-
+    printf("%ld",find_nearest_time(opart,length,t));
+    
 return 0;
 }
 
@@ -74,4 +71,19 @@ Time input_t(const char* __s){
    return t;
 }
 
+size_t find_nearest_time(Time* opart, size_t length, Time user_t){
+    size_t user_time = CALC_MINUTE(user_t);
+    size_t opart_min_time = CALC_MINUTE(opart[0]);
+    
+    size_t jpos = 0;
+
+    for(size_t i=1; i<length; ++i){
+        size_t cmtd = CALC_MINUTE(opart[i]); //departure
+        if(user_time > cmtd){
+            opart_min_time = cmtd;
+            ++jpos;
+        }
+    }
+    return jpos;
+}
 
