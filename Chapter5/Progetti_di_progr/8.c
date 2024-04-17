@@ -17,9 +17,9 @@ typedef struct{
 
 
 Time input_t(const char*);
-void print_t(const char*, Time);
+const char* view_t(Time);
 size_t find_nearest_time(Time*, size_t, Time);
-
+const char* s
 int main(void)
 {
     Time t;
@@ -50,9 +50,10 @@ int main(void)
 
     t = input_t("Enter a 24-hour: ");
 
-    printf("%ld",find_nearest_time(opart,length,t));
-    
-return 0;
+    //printf("%ld\n",find_nearest_time(opart,length,t));
+    //printf("Closest deapture time is %s, arriving at %s",view_t(t), view_arriving_t(oarr));
+
+return EXIT_SUCCESS;
 }
 
 Time input_t(const char* __s){
@@ -69,6 +70,18 @@ Time input_t(const char* __s){
     }
            
    return t;
+}
+const char* view_t(Time t){
+    //00:00·[AM/PM] charter max = 8+1;
+    char* __s = malloc(sizeof(char)*9);
+    
+    if(__s == NULL){
+        fprintf(stderr,"%s","Error! dynamic allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    sprintf(__s, "%.2u:%.2u %s", CONVERT_TO_12_HOUR(t.hours), t.minutes, AM_PM(t.hours));
+    return __s;
 }
 
 size_t find_nearest_time(Time* opart, size_t length, Time user_t){
