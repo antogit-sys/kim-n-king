@@ -21,6 +21,7 @@
         }\
     }while(0)  
 
+int input_num_grade(void);
 const char calc_grade(int);
 
 int main(void)
@@ -28,11 +29,20 @@ int main(void)
     int n = 0;
     
     fputs("Enter numerical grade: ",stdout);
-    fscanf(stdin,"%d",&n);
+    n = input_num_grade();
 
     fprintf(stdout,"Letter grade: %c\n",calc_grade(n));
 
 return EXIT_SUCCESS;
+}
+
+int input_num_grade(void){
+    int num = 0;
+    int result = fscanf(stdin, "%d", &num);
+    
+    EXIT_IF(result == 0,"Error! Enter a number pls\n");
+    
+    return num;
 }
 
 const char calc_grade(int n){
