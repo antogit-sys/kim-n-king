@@ -16,25 +16,25 @@
 #include <stdio.h>
 
 size_t CALC_DIGITS(size_t n){
-    size_t temp = n;
     size_t counter = 0;
 
-    for(; temp != 0; ++counter){
-        temp/=10;
-    }
+    do{
+        n/=10;
+        ++counter;
+    }while(n > 0);
+    
     return counter;
-
 }
 
 int main(void){
     int n,nd;
     
-    printf("Enter a number: ");
-    scanf("%d", &n);
+    fputs("Enter a number: ",stdout);
+    fscanf(stdin,"%d", &n);
 
     nd = CALC_DIGITS(n);
 
-    printf("The number %d has %d digits\n", n, nd);
+    fprintf(stdout,"The number %d has %d digits\n", n, nd);
 
     return 0;
 }
