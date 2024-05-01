@@ -15,7 +15,7 @@
  */
 
 #include <stdio.h>
-#define FACT(n) (n*n)
+#define QUAD(n) (n*n)
 int main(void)
 {
     float e;
@@ -25,7 +25,7 @@ int main(void)
     scanf("%d",&n);
 
     for(int i = 1, den=1; i <= n; ++i){
-        e += 1.0f / (den*=FACT(i));
+        e += 1.0f / (den*=QUAD(i));
     }
 
     printf("e: %f\n", e);
