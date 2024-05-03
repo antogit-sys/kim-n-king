@@ -9,24 +9,31 @@
 
 #include <stdio.h>
 
-int quad(int n){return n*n;}
+int fact(int n){
+    int done = 1;
+    for(int i = 1; i<=n; ++i){
+        done*=i;
+    }
+    return done;
+}
 
 int main(void)
 {
-    puts("fuck u!");
-    /*
-    float e=0.0f,E;
-    float current=1.0f;
-    int i = 1;
-    
-    fputs("E? ",stdout);
+        
+    float e=2.0f;
+    float E,current;
+    int i=1;
+
+    printf("epsilon> ");
     scanf("%f",&E);
 
     do{
-        e += current;
-        current = 1.0f / quad(i++);
-        printf("e%d: %f\n",i,e);
-    }while(current>=E);
-    */
+        current = 1.0f / fact(++i);
+        e+=current;
+    }while(current > E);
+    
+    printf("%f < %f\n",current,E);
+    printf("e: %f\n",e);
+    
 return 0;
 }
