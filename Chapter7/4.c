@@ -32,7 +32,7 @@ return 0;
 }
 
 void print_num(const char *s){
-    int ch;
+    char ch;
 
     fputs(s, stdout);
     fflush(stdout);
