@@ -1,10 +1,9 @@
 /* - Progetti di prog
  *
- *  6. modificate il programma addfrac.c della Sezione 3.2 in modo che l'utente
- *  immetta allo stesso tempo entrambe le frazioni separate da un segno più:
- *  
- *  Enter two fractions separated by a plus sign: 5/6+3/4
- *  The sum is 38/24
+ *  7. Modify Programming Project 6 from Chapter 3 
+ *  so that the user may add, subtract, multiply or 
+ *  divide two fractions (by entering either +, -, * 
+ *  or / between the fractions).
  *
  */
 
