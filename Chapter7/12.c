@@ -22,25 +22,21 @@ int main(void)
     scanf("%f",&tot);
 
     while((ch = getchar()) != '\n'){
-
+        scanf("%f",&num);
         switch(ch){
             case '+':
-                scanf("%f",&num);
                 tot+=num;
                 break;
 
             case '-':
-                scanf("%f",&num);
                 tot-=num;
                 break;
 
             case '*':
-                scanf("%f",&num);
                 tot*=num;
                 break;
 
             case '/':
-                scanf("%f",&num);
                 tot/=num;
                 break;
 
