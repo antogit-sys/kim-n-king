@@ -18,13 +18,26 @@
  * In cases (e)-(g), the program will display a close approximation of the 
  * factorial, not necessarily the exact value.
  *
+ *  - * Solutions * - 
+ * (a) 7
+ * (b) 13
+ * (c) 20
+ * (d) 20
+ * (e) 34
+ * (f) 170
+ * (g) 1754
  *
  **/
 
 #include <stdio.h>
 
-typedef short Type;
+//typedef short Type;
 //typedef int Type;
+//typedef long Type;
+//typedef long long Type;
+//typedef float Type;
+//typedef double Type;
+typedef long double Type;
 
 Type fact(Type);
 
@@ -33,9 +46,9 @@ int main(void)
     Type n;
 
     fputs("Enter a positive: ",stdout);
-    scanf("%hd",&n);
+    scanf("%Lf",&n);
 
-    fprintf(stdout,"Factorial of %hd: %hd\n",n,fact(n));
+    fprintf(stdout,"Factorial of %Lf: %Lf\n",n,fact(n));
 
 
 return 0;
