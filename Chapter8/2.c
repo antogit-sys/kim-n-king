@@ -34,20 +34,17 @@ int main(void)
 }
 
 void print_occ(long n){
-    int occ = 0, digit = 0;
-    long num = n;
+    int occurrences[10] = {0};
+    int digit;
 
-    for(int i = 0; i < 10; ++i){
-        occ = 0;
-        n = num;
-        while(n > 0){
-            digit = n % 10;
-            if(digit == i){
-                occ++;
-            }
-            n /= 10;
-        }
-        PUTINT(occ);
+    while (n > 0){
+        digit = n % 10;
+        occurrences[digit]++;
+        n /= 10;
+    }
+
+    for(size_t i = 0; i<10; ++i){
+        PUTINT(occurrences[i]);
     }
 
 }
