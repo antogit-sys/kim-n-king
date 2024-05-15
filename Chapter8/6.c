@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define PUTINT(n) fprintf(stdout,"%d",n)
+#define PUTINT(n) putchar(n+'0')
 
 int main(void)
 {
