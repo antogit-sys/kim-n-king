@@ -1,22 +1,15 @@
-/* Prog di prog 
+/* Prog di prog 8
  *
- * 4. Write a program that translates an alphabetic 
- * phone number into numeric form:
- *
- *  Enter phone number: CALLATT
- *  2255288
- *
- * (In case you don't have a telephone nearby, here 
- * are the letters on the keys: 2=ABC, 3=DEF, 4=GHI, 
- * 5=JKL, 6=MNO, 7=PRS, 8=TUV, 9=WXY.) If the original 
- * phone number contains nonalphabetic characters (digits 
- * or punctuation, for example), leave them unchanged:
- *
+ * 11. Modify Programming Project 4 from Chapter 7 so that 
+ * the program labels its output:
+ *  
  *  Enter phone number: 1-800-COL-LECT
- *  1-800-265-5328
+ *  In numeric form: 1-800-265-5328
  *
- * You may assums that any letteres entered by the user 
- * are upper case.
+ * The program will need to store the phone number (either 
+ * in its original form or in its numeric form) in an array 
+ * of character until it can be printed. You may assume that 
+ * the phone number is no more than 15 characters long.
  *
  **/
 #include <stdio.h>
