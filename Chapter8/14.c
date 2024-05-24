@@ -15,21 +15,15 @@
 #define N 100
 
 size_t input_stdi(char*, char*);
-
-
-#include <stdio.h>
-
-#define N 100
-
+void reversal_sentence(char*, size_t n, char*);
 int main(void) {
 
-    int i = 0, j = 0;
     char c, c_term, words[N] = {0};
 
     fputs("Enter a sentence: ",stdout);
     i = input_stdi(words,&c_term);
 
-    EXIT_IF(IN(c_term, !=, '.','?','!'), "Error invalid final charter!");
+    EXIT_IF(IN(c_term, != ,'.','?','!'), "Error invalid final charter!");
 
     fputs("Reversal of sentence: ",stdout);
 
@@ -44,4 +38,10 @@ size_t input_stdi(char* v, char* term){
         *term = ch;
     }
     return i;
+}
+
+void reversal_sentence(char* v, size_t n, char* term){
+
+
+
 }
