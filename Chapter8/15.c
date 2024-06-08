@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #define OCA(v,n)  for(size_t i=0; i<n; ++i) putchar(v[i])
+#define NEW_LINE(n) for(size_t i=0; i<n; ++i) putchar('\n');
 #define NEW_ARRAY(t,n)  ((t*)calloc(n,sizeof(t)))
 #define ARRCPY(dest, src, size) for(size_t i=0; i<size; ++i) dest[i]=src[i]
 #define EXIT_IF(c, s)\
@@ -19,6 +20,7 @@
 
 size_t input_char_arr(const char*, char*);
 char* caesar_encoder(char*, size_t, int);
+void bruteforce_key(char*, size_t);
 
 int main(void)
 {
@@ -33,7 +35,11 @@ int main(void)
     v = caesar_encoder(v,dim, key);
 
     fputs("Encrypted message: ",stdout);
-    OCA(v,dim);
+    OCA(v, dim);
+    NEW_LINE(2);
+
+    puts(" - Decrypted sentence used by bruteforce key -\n");
+    bruteforce_key(v, dim);
 
 return 0;
 }
@@ -81,4 +87,17 @@ char* caesar_encoder(char* v, size_t str_len, int key){
     }
 
 return arr;
+}
+
+void bruteforce_key(char* v, size_t str_len){
+    puts(" \tKEY\tDECRYPT");
+    puts(" \t----------------------------");
+
+    for(size_t key=25; key>=1; --key){
+        char* d = NEW_ARRAY(char, str_len);
+        fprintf(stdout,"\t %d\t",26-key);
+        d = caesar_encoder(v, str_len, key);
+        OCA(d, str_len);
+        putchar('\n');
+    }
 }
