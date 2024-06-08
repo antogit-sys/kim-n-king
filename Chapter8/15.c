@@ -3,6 +3,7 @@
 
 #define OCA(v,n)  for(size_t i=0; i<n; ++i) putchar(v[i])
 #define NEW_ARRAY(t,n)  ((t*)calloc(n,sizeof(t)))
+#define ARRCPY(dest, src, size) for(size_t i=0; i<size; ++i) dest[i]=src[i]
 #define EXIT_IF(c, s)\
     do{\
         if((c)){\
@@ -52,8 +53,12 @@ size_t input_char_arr(const char* s, char* arr){
     return i;
 }
 
-char* caesar_encoder(char* arr, size_t str_len, int key){
+char* caesar_encoder(char* v, size_t str_len, int key){
     int ch;
+    char* arr = NEW_ARRAY(char, str_len);
+    
+    ARRCPY(arr, v, str_len);
+
     for(size_t i = 0; i<str_len; i++){
         ch = arr[i];
         switch(ch){
@@ -74,5 +79,6 @@ char* caesar_encoder(char* arr, size_t str_len, int key){
         }
         arr[i]=ch;
     }
+
 return arr;
 }
