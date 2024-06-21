@@ -21,12 +21,12 @@ int main(void)
     // magic square
     int short n; 
     int** m;
-
+    
     puts("This is program creates a magic square of a specified size.");
     puts("The size must be an odd number between 1 and 99.");
     fputs("Enter the size of magic square: ",stdout);
     fscanf(stdin, "%hd", &n);
-
+    
     m = (int**) matrix_alloc(n, n);
     EXIT_IF(!m, "***failed matrix allocation***");
 
@@ -48,11 +48,11 @@ void** matrix_alloc(size_t elementsize, size_t count)
 
     ONERR:
     FREE_MATRIX(m, count);
-	return NULL;
+    return NULL;
  }
 
 void free_matrix(void** m, size_t count){
-	for(unsigned i=0; i<count && m[i]; ++i)
+    for(unsigned i=0; i<count && m[i]; ++i)
         free(m[i]);
     free(m);
 }
@@ -67,26 +67,26 @@ void printim(int** m, size_t r, size_t c){
 }
 
 void in_matrix(int** magic_square, size_t n){
-	int i = 0, j = n / 2;
-	int newi, newj, num=1;
+    int i = 0, j = n / 2;
+    int newi, newj, num=1;
 	
-	//finisce quando num diventa n*n (n*n= numeti totali della matrice ,r * c)
-	while(num <= n*n){
-		magic_square[i][j]=num++;
+    //finisce quando num diventa n*n (n*n= numeti totali della matrice ,r * c)
+    while(num <= n*n){
+    	magic_square[i][j]=num++;
+    	
+    	//applico l'algoritmo per generare un quadrato magico
+    	newi = (i - 1 + n) % n;
+    	newj = (j + 1) % n;
 		
-		//applico l'algoritmo per generare un quadrato magico
-		newi = (i - 1 + n) % n;
-		newj = (j + 1) % n;
-		
-		//se la posizione è occupata allora
-		if(magic_square[newi][newj] != 0){
-			//mi sposto di una riga in basso
-			i = (i + 1) % n;
-		}else{
-			//altrimenti salvo i nuovi valori dell'algoritmo nelle variabili effettive
-			i = newi;
-			j = newj;
-		}
-	}
+    	//se la posizione è occupata allora
+        if(magic_square[newi][newj] != 0){
+		    //mi sposto di una riga in basso
+		    i = (i + 1) % n;
+	    }else{
+            //altrimenti salvo i nuovi valori dell'algoritmo nelle variabili effettive
+		    i = newi;
+		    j = newj;
+	    }
+    }
 	
 }
