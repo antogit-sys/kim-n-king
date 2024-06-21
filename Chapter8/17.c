@@ -51,7 +51,7 @@ void** matrix_alloc(size_t elementsize, size_t count)
     return NULL;
  }
 
-void free_matrix(void** m, size_t count){
+void __free_matrix(void** m, size_t count){
     for(unsigned i=0; i<count && m[i]; ++i)
         free(m[i]);
     free(m);
