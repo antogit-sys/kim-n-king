@@ -9,10 +9,10 @@
         }\
     }while(0)
   
-#define FREE_MATRIX(m ,c)	free_matrix((void**)m, c)
+#define FREE_MATRIX(m ,c)	__free_matrix((void**)m, c)
     
 void** matrix_alloc(size_t, size_t);
-void free_matrix(void**, size_t);
+void __free_matrix(void**, size_t);
 void printim(int**, size_t, size_t);
 void in_matrix(int**, size_t);
 
@@ -47,7 +47,7 @@ void** matrix_alloc(size_t elementsize, size_t count)
     return m;
 
     ONERR:
-    FREE_MATRIX(m, count);
+    __free_matrix(m, count);
     return NULL;
  }
 
