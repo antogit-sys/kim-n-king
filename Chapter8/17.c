@@ -80,13 +80,13 @@ void in_matrix(int** magic_square, size_t n){
 		
     	//se la posizione è occupata allora
         if(magic_square[newi][newj] != 0){
-		    //mi sposto di una riga in basso
-		    i = (i + 1) % n;
-	    }else{
+            //mi sposto di una riga in basso
+            i = (i + 1) % n;
+        }else{
             //altrimenti salvo i nuovi valori dell'algoritmo nelle variabili effettive
-		    i = newi;
-		    j = newj;
-	    }
+            i = newi;
+            j = newj;
+        }
     }
 	
 }
